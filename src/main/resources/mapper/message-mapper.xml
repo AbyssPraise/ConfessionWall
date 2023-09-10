@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pl.confessionwall.MessageMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="mid" keyColumn="mid">
+        insert into messages(uid, username, whom, what) values(#{uid}, #{username}, #{whom}, #{what})
+    </insert>
+    <delete id="remove">
+        delete from messages where mid = #{mid}
+    </delete>
+    <select id="selectAll" resultType="com.pl.confessionwall.entity.Message">
+        select mid, m.uid, m.username, whom, what from
+        users as u join
+        messages as m on u.uid = m.uid
+        order by mid desc
+    </select>
+</mapper>
